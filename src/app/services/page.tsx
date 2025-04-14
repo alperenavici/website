@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { FaBalanceScale, FaGavel, FaHandshake, FaHome, FaBriefcase, FaUserFriends } from 'react-icons/fa';
 
 export const metadata = {
-  title: 'Hizmetlerimiz | Av. Mehmet Yılmaz Hukuk Bürosu',
+  title: 'Hizmetlerimiz | Av. Mehmet Can Çelimli Bürosu',
   description: 'Hukuk büromuzun sunduğu hizmetler ve uzmanlık alanları hakkında bilgi edinin.',
 };
 
@@ -45,7 +45,7 @@ export default function ServicesPage() {
                 <p className="text-[#4A4A4A] mb-6">
                   Ceza davalarında savunma, kovuşturma öncesi danışmanlık, ceza infaz hukuku ve ceza muhakemesi hukuku alanlarında hizmet veriyoruz.
                 </p>
-                <Link href="/services/criminal-law" className="text-[#8B7D6B] hover:text-[#6B5F4F] font-medium">
+                <Link href="/blog?category=ceza-hukuku" className="text-[#8B7D6B] hover:text-[#6B5F4F] font-medium">
                   Detaylı Bilgi →
                 </Link>
               </div>
@@ -61,7 +61,7 @@ export default function ServicesPage() {
                 <p className="text-[#4A4A4A] mb-6">
                   Boşanma, nafaka, velayet, mal paylaşımı, evlat edinme ve aile içi şiddet konularında hukuki danışmanlık ve dava takibi yapıyoruz.
                 </p>
-                <Link href="/services/family-law" className="text-[#8B7D6B] hover:text-[#6B5F4F] font-medium">
+                <Link href="/blog?category=aile-hukuku" className="text-[#8B7D6B] hover:text-[#6B5F4F] font-medium">
                   Detaylı Bilgi →
                 </Link>
               </div>
@@ -77,7 +77,7 @@ export default function ServicesPage() {
                 <p className="text-[#4A4A4A] mb-6">
                   İş sözleşmeleri, iş güvenliği, iş kazaları, işçi-işveren uyuşmazlıkları ve toplu iş hukuku konularında hizmet veriyoruz.
                 </p>
-                <Link href="/services/labor-law" className="text-[#8B7D6B] hover:text-[#6B5F4F] font-medium">
+                <Link href="/blog?category=is-hukuku" className="text-[#8B7D6B] hover:text-[#6B5F4F] font-medium">
                   Detaylı Bilgi →
                 </Link>
               </div>
@@ -93,7 +93,7 @@ export default function ServicesPage() {
                 <p className="text-[#4A4A4A] mb-6">
                   Şirketler hukuku, ticari sözleşmeler, rekabet hukuku, ticari uyuşmazlıklar ve iflas hukuku alanlarında danışmanlık hizmeti sunuyoruz.
                 </p>
-                <Link href="/services/commercial-law" className="text-[#8B7D6B] hover:text-[#6B5F4F] font-medium">
+                <Link href="/blog?category=ticaret-hukuku" className="text-[#8B7D6B] hover:text-[#6B5F4F] font-medium">
                   Detaylı Bilgi →
                 </Link>
               </div>
@@ -109,7 +109,7 @@ export default function ServicesPage() {
                 <p className="text-[#4A4A4A] mb-6">
                   Tapu işlemleri, kira hukuku, kat mülkiyeti, imar hukuku ve kamulaştırma konularında hukuki danışmanlık ve dava takibi yapıyoruz.
                 </p>
-                <Link href="/services/real-estate-law" className="text-[#8B7D6B] hover:text-[#6B5F4F] font-medium">
+                <Link href="/blog?category=gayrimenkul-hukuku" className="text-[#8B7D6B] hover:text-[#6B5F4F] font-medium">
                   Detaylı Bilgi →
                 </Link>
               </div>
@@ -125,7 +125,7 @@ export default function ServicesPage() {
                 <p className="text-[#4A4A4A] mb-6">
                   Miras paylaşımı, mirasçılık belgesi, miras reddi, vasiyetname ve miras davaları konularında hukuki danışmanlık hizmeti veriyoruz.
                 </p>
-                <Link href="/services/inheritance-law" className="text-[#8B7D6B] hover:text-[#6B5F4F] font-medium">
+                <Link href="/blog?category=miras-hukuku" className="text-[#8B7D6B] hover:text-[#6B5F4F] font-medium">
                   Detaylı Bilgi →
                 </Link>
               </div>
