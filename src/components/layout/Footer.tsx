@@ -6,20 +6,20 @@ const Footer = () => {
 
   return (
     <footer className="bg-[#333333] text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About Section */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Hakkımızda</h3>
-            <p className="text-white-400">
+            <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Hakkımızda</h3>
+            <p className="text-white-400 text-sm sm:text-base">
               Profesyonel hukuk ekibimizle müvekkillerimize en iyi hizmeti sunmak için çalışıyoruz.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Hızlı Bağlantılar</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Hızlı Bağlantılar</h3>
+            <ul className="space-y-1 sm:space-y-2 text-sm sm:text-base">
               <li>
                 <Link href="/" className="text-white-400 hover:text-white transition-colors">
                   Ana Sayfa
@@ -50,8 +50,8 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Hizmetlerimiz</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Hizmetlerimiz</h3>
+            <ul className="space-y-1 sm:space-y-2 text-sm sm:text-base">
               <li>
                 <Link href="/services/criminal" className="text-white-400 hover:text-white transition-colors">
                   Ceza Hukuku
@@ -77,18 +77,18 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-xl font-bold mb-4">İletişim</h3>
-            <ul className="space-y-4">
+            <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">İletişim</h3>
+            <ul className="space-y-2 sm:space-y-4 text-sm sm:text-base">
               <li className="flex items-center">
-                <FaMapMarkerAlt className="mr-2 text-white-400" />
+                <FaMapMarkerAlt className="mr-2 text-white-400 flex-shrink-0" />
                 <span className="text-white-400">İstanbul, Türkiye</span>
               </li>
               <li className="flex items-center">
-                <FaPhone className="mr-2 text-white-400" />
+                <FaPhone className="mr-2 text-white-400 flex-shrink-0" />
                 <span className="text-white-400">+90 212 555 44 33</span>
               </li>
               <li className="flex items-center">
-                <FaEnvelope className="mr-2 text-white-400" />
+                <FaEnvelope className="mr-2 text-white-400 flex-shrink-0" />
                 <span className="text-white-400">info@avukatlik.com</span>
               </li>
             </ul>
@@ -109,7 +109,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-white-800 mt-12 pt-8 text-center text-white-400">
+        <div className="border-t border-white-800 mt-8 sm:mt-12 pt-6 sm:pt-8 text-center text-white-400 text-sm">
           <p>&copy; {currentYear} Av. Mehmet Can Çelimli. Tüm hakları saklıdır.</p>
         </div>
       </div>
