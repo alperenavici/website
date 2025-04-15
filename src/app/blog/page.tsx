@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 import { tr } from 'date-fns/locale';
 import { BlogPost, BlogCategory } from '@/types/blog';
 import { useSearchParams } from 'next/navigation';
-import { blogCategories } from '@/data/blogCategories';
+import { blogCategories, getBlogCategories } from '@/data/blogCategories';
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -17,30 +17,36 @@ export default function BlogPage() {
   const searchParams = useSearchParams();
   const selectedCategory = searchParams.get('category');
 
-  // Blog yazılarını yükle
+  // Blog yazılarını ve kategorileri yükle
   useEffect(() => {
-    fetchPosts();
-  }, [selectedCategory]);
-
-  const fetchPosts = async () => {
-    try {
-      const allPosts = await getBlogPosts();
-      
-      // Filter posts by category if a category is selected
-      if (selectedCategory) {
-        const filteredPosts = allPosts.filter(post => 
-          post.categories.includes(selectedCategory)
-        );
-        setPosts(filteredPosts);
-      } else {
-        setPosts(allPosts);
+    const fetchData = async () => {
+      try {
+        // Kategorileri ve blog yazılarını paralel olarak çek
+        const [categoriesData, allPosts] = await Promise.all([
+          getBlogCategories(),
+          getBlogPosts()
+        ]);
+        
+        setCategories(categoriesData);
+        
+        // Filter posts by category if a category is selected
+        if (selectedCategory) {
+          const filteredPosts = allPosts.filter(post => 
+            post.categories.includes(selectedCategory)
+          );
+          setPosts(filteredPosts);
+        } else {
+          setPosts(allPosts);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+
+    fetchData();
+  }, [selectedCategory]);
 
   if (loading) {
     return (
@@ -160,7 +166,7 @@ export default function BlogPage() {
                       </span>
                     </Link>
                   </li>
-                  {categories.map((category) => (
+                  {categories?.map((category) => (
                     <li key={category.id}>
                       <Link 
                         href={`/blog?category=${category.slug}`}
@@ -169,7 +175,7 @@ export default function BlogPage() {
                       >
                         <span>{category.name}</span>
                         <span className="bg-[#E8E2D9] text-[#8B7D6B] text-xs rounded-full px-2 py-1">
-                          {posts.filter(post => post.categories.includes(category.slug)).length}
+                          {posts?.filter(post => post.categories?.includes(category.slug)).length || 0}
                         </span>
                       </Link>
                     </li>
@@ -198,9 +204,9 @@ export default function BlogPage() {
                             {post.title}
                           </Link>
                         </h4>
-                        <div className="text-xs text-slate-500 mt-1">
+                        <p className="text-sm text-gray-500 mt-1">
                           {format(new Date(post.date), 'd MMMM yyyy', { locale: tr })}
-                        </div>
+                        </p>
                       </div>
                     </li>
                   ))}

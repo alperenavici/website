@@ -1,42 +1,59 @@
 import { BlogCategory } from '@/types/blog';
+import { supabase } from '@/lib/supabase';
 
-export const blogCategories: BlogCategory[] = [
-  {
-    id: '1',
-    name: 'Ceza Hukuku',
-    slug: 'ceza-hukuku'
-  },
-  {
-    id: '2',
-    name: 'Aile Hukuku',
-    slug: 'aile-hukuku'
-  },
-  {
-    id: '3',
-    name: 'İş Hukuku',
-    slug: 'is-hukuku'
-  },
-  {
-    id: '4',
-    name: 'Ticaret Hukuku',
-    slug: 'ticaret-hukuku'
-  },
-  {
-    id: '5',
-    name: 'Gayrimenkul Hukuku',
-    slug: 'gayrimenkul-hukuku'
-  },
-  {
-    id: '6',
-    name: 'Miras Hukuku',
-    slug: 'miras-hukuku'
+// Tüm kategorileri getiren fonksiyon - sadece dinamik kategorileri veritabanından çeker
+export async function getBlogCategories(): Promise<BlogCategory[]> {
+  try {
+    // Sadece admin panelinden kategorileri çek
+    const { data: adminCategories, error } = await supabase
+      .from('categories')
+      .select('*')
+      .order('name', { ascending: true });
+
+    if (error) {
+      console.error('Error fetching categories:', error);
+      return [];
+    }
+
+    // Admin kategorilerini blog kategori formatına dönüştür
+    const formattedCategories = adminCategories.map(cat => ({
+      id: cat.id,
+      name: cat.name,
+      slug: cat.slug
+    }));
+
+    return formattedCategories;
+  } catch (error) {
+    console.error('Error in getBlogCategories:', error);
+    return [];
   }
-];
-
-export function getBlogCategories() {
-  return blogCategories;
 }
 
-export function getBlogCategoryBySlug(slug: string) {
-  return blogCategories.find(category => category.slug === slug);
+// Başlangıç yüklemesi için boş dizi, asenkron olarak doldurulacak
+export const blogCategories: BlogCategory[] = [];
+
+// Slug'a göre kategori getiren fonksiyon
+export async function getBlogCategoryBySlug(slug: string): Promise<BlogCategory | null> {
+  try {
+    // Veritabanından kategoriyi bul
+    const { data: category, error } = await supabase
+      .from('categories')
+      .select('*')
+      .eq('slug', slug)
+      .maybeSingle();
+
+    if (error || !category) {
+      console.error('Error fetching category by slug:', error);
+      return null;
+    }
+
+    return {
+      id: category.id,
+      name: category.name,
+      slug: category.slug
+    };
+  } catch (error) {
+    console.error('Error in getBlogCategoryBySlug:', error);
+    return null;
+  }
 }

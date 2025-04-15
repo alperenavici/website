@@ -1,0 +1,16 @@
+/* Admin paneli için CSS */
+
+/* Header ve Footer gizleme */
+header, footer {
+  display: none !important;
+}
+
+/* Admin layout için arka plan */
+.admin-layout {
+  min-height: 100vh;
+}
+
+/* Body arka plan rengi */
+body {
+  background-color: #f3f4f6;
+} 

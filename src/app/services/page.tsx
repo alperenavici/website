@@ -13,7 +13,7 @@ export default function ServicesPage() {
       {/* Hero section */}
       <section className="relative h-[400px] bg-[#8B7D6B] text-white flex items-center">
         <div className="absolute inset-0 z-0">
-          <Image 
+          <Image
             src="/images/services.jpg"
             alt="Hizmetlerimiz Sayfası Arka Plan"
             fill

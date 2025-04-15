@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaBalanceScale, FaClock, FaHandshake, FaGraduationCap } from 'react-icons/fa';
@@ -18,40 +18,17 @@ interface TeamMember {
 }
 
 export default function AboutPage() {
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const supabase = createClientComponentClient();
-
-  useEffect(() => {
-    fetchTeamMembers();
-  }, []);
-
-  const fetchTeamMembers = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('team_members')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setTeamMembers(data || []);
-    } catch (error) {
-      console.error('Error fetching team members:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  if (isLoading) {
-    return <div className="p-8">Yükleniyor...</div>;
-  }
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+  );
 
   return (
     <>
       {/* Hero section */}
       <section className="relative h-[400px] bg-[#8B7D6B] text-white flex items-center">
         <div className="absolute inset-0 z-0">
-          <Image 
+          <Image
             src="/images/about2.jpg"
             alt="Hakkımızda Sayfası Arka Plan"
             fill
@@ -151,8 +128,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-     
-      
+
+
 
       {/* CTA section */}
       <section className="bg-[#8B7D6B] py-16 text-white">
