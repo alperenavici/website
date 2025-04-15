@@ -1,6 +1,5 @@
 'use client';
 
-import { createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaBalanceScale, FaClock, FaHandshake, FaGraduationCap } from 'react-icons/fa';
