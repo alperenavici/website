@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Post, Comment, Category } from '@/types/supabase';
+import { Post } from '@/types/supabase';
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -20,11 +20,11 @@ export default function AdminDashboard() {
         // Fetch stats
         const statsResponse = await fetch('/api/admin/stats');
         const statsData = await statsResponse.json();
-        
+
         // Fetch recent posts
         const postsResponse = await fetch('/api/admin/posts?limit=5&sortBy=created_at&sortDesc=true');
         const postsData = await postsResponse.json();
-        
+
         setStats(statsData);
         setRecentPosts(postsData.items);
       } catch (error) {
@@ -48,22 +48,22 @@ export default function AdminDashboard() {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
-      
+
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div className="bg-white p-6 rounded-lg shadow">
           <div className="text-2xl font-bold">{stats.postsCount}</div>
           <div className="text-gray-600">Toplam Yazı</div>
         </div>
-        
+
         <div className="bg-white p-6 rounded-lg shadow">
           <div className="text-2xl font-bold">{stats.categoriesCount}</div>
           <div className="text-gray-600">Kategori</div>
         </div>
-        
+
 
       </div>
-      
+
       {/* Recent Posts */}
       <div className="bg-white p-6 rounded-lg shadow mb-8">
         <div className="flex justify-between items-center mb-4">
@@ -72,7 +72,7 @@ export default function AdminDashboard() {
             Tümünü Gör
           </Link>
         </div>
-        
+
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
@@ -99,9 +99,8 @@ export default function AdminDashboard() {
                       <div className="text-sm font-medium text-gray-900">{post.title}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                        post.published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                      }`}>
+                      <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${post.published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                        }`}>
                         {post.published ? 'Yayında' : 'Taslak'}
                       </span>
                     </td>
@@ -126,19 +125,19 @@ export default function AdminDashboard() {
           </table>
         </div>
       </div>
-      
+
       {/* Quick Actions */}
       <div className="bg-white p-6 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-6 text-gray-800">Hızlı İşlemler</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Link 
-            href="/admin/dashboard/posts/create" 
+          <Link
+            href="/admin/dashboard/posts/create"
             className="flex items-center justify-center bg-[#8B7D6B] text-white px-6 py-3 rounded-lg text-center hover:bg-[#7C6F60] transition-all duration-300 shadow-md hover:shadow-lg"
           >
             <span className="text-lg font-medium">Yeni Yazı Ekle</span>
           </Link>
-          <Link 
-            href="/admin/dashboard/categories" 
+          <Link
+            href="/admin/dashboard/categories"
             className="flex items-center justify-center bg-[#8B7D6B] text-white px-6 py-3 rounded-lg text-center hover:bg-[#7C6F60] transition-all duration-300 shadow-md hover:shadow-lg"
           >
             <span className="text-lg font-medium">Kategori Yönetimi</span>

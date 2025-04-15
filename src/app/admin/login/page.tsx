@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -46,14 +47,14 @@ export default function LoginPage() {
           <h1 className="text-3xl font-bold">Admin Girişi</h1>
           <p className="mt-2 text-sm text-gray-600">Yönetici paneline erişmek için giriş yapın</p>
         </div>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
               <span className="block sm:inline">{error}</span>
             </div>
           )}
-          
+
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email-address" className="sr-only">Email</label>
@@ -93,13 +94,13 @@ export default function LoginPage() {
             >
               {loading ? 'Giriş yapılıyor...' : 'Giriş Yap'}
             </button>
-            
-            <a 
+
+            <Link
               href="/"
               className="text-center text-sm text-gray-600 hover:text-gray-900 transition-colors"
             >
               Web sitesine dön
-            </a>
+            </Link>
           </div>
         </form>
       </div>

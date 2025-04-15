@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 
 interface Category {
   id: string;
@@ -21,11 +20,11 @@ export default function CategoriesPage() {
   const [newCategoryName, setNewCategoryName] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [error, setError] = useState('');
-  
+
   useEffect(() => {
     fetchCategories();
   }, []);
-  
+
   const fetchCategories = async () => {
     try {
       const response = await fetch('/api/admin/categories');
@@ -38,18 +37,18 @@ export default function CategoriesPage() {
       setLoading(false);
     }
   };
-  
+
   const handleCreateCategory = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!newCategoryName.trim()) {
       setError('Kategori adı boş olamaz.');
       return;
     }
-    
+
     setIsCreating(true);
     setError('');
-    
+
     try {
       const response = await fetch('/api/admin/categories', {
         method: 'POST',
@@ -58,54 +57,54 @@ export default function CategoriesPage() {
         },
         body: JSON.stringify({ name: newCategoryName })
       });
-      
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Kategori oluşturulurken bir hata oluştu.');
       }
-      
+
       setNewCategoryName('');
       fetchCategories();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating category:', error);
-      setError(error.message || 'Kategori oluşturulurken bir hata oluştu.');
+      setError(error instanceof Error ? error.message : 'Kategori oluşturulurken bir hata oluştu.');
     } finally {
       setIsCreating(false);
     }
   };
-  
+
   const handleDeleteCategory = async (id: string) => {
     if (!confirm('Bu kategoriyi silmek istediğinizden emin misiniz?')) {
       return;
     }
-    
+
     try {
       const response = await fetch(`/api/admin/categories/${id}`, {
         method: 'DELETE'
       });
-      
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Kategori silinirken bir hata oluştu.');
       }
-      
+
       fetchCategories();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error deleting category:', error);
-      setError(error.message || 'Kategori silinirken bir hata oluştu.');
+      setError(error instanceof Error ? error.message : 'Kategori silinirken bir hata oluştu.');
     }
   };
-  
+
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6">Kategoriler</h1>
-      
+
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           {error}
         </div>
       )}
-      
+
       {/* Create Category Form */}
       <div className="bg-white p-6 rounded-lg shadow mb-6">
         <h2 className="text-xl font-semibold mb-4">Yeni Kategori Ekle</h2>
@@ -127,7 +126,7 @@ export default function CategoriesPage() {
           </button>
         </form>
       </div>
-      
+
       {/* Categories Table */}
       <div className="bg-white p-6 rounded-lg shadow">
         {loading ? (
@@ -154,7 +153,7 @@ export default function CategoriesPage() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-              {categories.length > 0 ? (
+                {categories.length > 0 ? (
                   categories.map((category) => (
                     <tr key={category.id}>
                       <td className="px-6 py-4 whitespace-nowrap">

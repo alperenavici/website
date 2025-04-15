@@ -41,7 +41,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
       coverImage: post.image_url || '/images/blog1.jpg',
       categories: post.categories ? JSON.parse(post.categories) : []
     }));
-    
+
     // Admin posts verisini düzenle
     const formattedAdminPosts = (adminPosts || []).map(post => ({
       id: post.id,
@@ -54,7 +54,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
       coverImage: post.cover_image || '/images/blog1.jpg',
       categories: post.category ? [post.category.slug] : []
     }));
-    
+
     // İki kaynaktan gelen verileri birleştir
     return [...formattedBlogPosts, ...formattedAdminPosts];
   } catch (error) {
@@ -66,7 +66,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
     // İlk olarak blog_posts tablosunda ara
-    const { data: blogPost, error: blogError } = await supabase
+    const { data: blogPost } = await supabase
       .from('blog_posts')
       .select('*')
       .eq('slug', slug)
@@ -87,7 +87,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
     }
 
     // Bulunamadıysa posts tablosunda ara
-    const { data: adminPost, error: adminError } = await supabase
+    const { data: adminPost } = await supabase
       .from('posts')
       .select(`
         *,
@@ -123,7 +123,7 @@ export async function getRecentBlogPosts(count: number = 3): Promise<BlogPost[]>
   try {
     // Tüm blog yazılarını getir
     const allPosts = await getBlogPosts();
-    
+
     // Tarihe göre sırala ve istenen sayıda döndür
     return allPosts
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())

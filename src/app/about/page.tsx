@@ -1,28 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaBalanceScale, FaClock, FaHandshake, FaGraduationCap } from 'react-icons/fa';
 
-interface TeamMember {
-  id: string;
-  name: string;
-  title: string;
-  description: string;
-  image_url: string;
-  facebook_url?: string;
-  twitter_url?: string;
-  linkedin_url?: string;
-}
-
 export default function AboutPage() {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-  );
-
   return (
     <>
       {/* Hero section */}

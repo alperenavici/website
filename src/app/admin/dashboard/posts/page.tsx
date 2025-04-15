@@ -13,31 +13,32 @@ export default function PostsPage() {
   const [category, setCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  
+
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   // Initialize filters from URL search params
   useEffect(() => {
     const page = searchParams.get('page');
     const q = searchParams.get('q');
     const cat = searchParams.get('category');
-    
+
     if (page) setCurrentPage(parseInt(page));
     if (q) setSearchQuery(q);
     if (cat) setCategory(cat);
-    
+
     fetchPosts(
       page ? parseInt(page) : 1,
       q || '',
       cat || ''
     );
     fetchCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
-  
+
   const fetchPosts = async (page = 1, q = searchQuery, cat = category) => {
     setLoading(true);
-    
+
     try {
       // Build query params
       const params = new URLSearchParams();
@@ -45,13 +46,13 @@ export default function PostsPage() {
       params.append('limit', '10');
       if (q) params.append('q', q);
       if (cat) params.append('category', cat);
-      
+
       const response = await fetch(`/api/admin/posts?${params}`);
       if (!response.ok) {
         throw new Error('Failed to fetch posts');
       }
       const data = await response.json();
-      
+
       setPosts(data.items);
       setTotalPages(data.pageCount);
     } catch (error) {
@@ -61,7 +62,7 @@ export default function PostsPage() {
       setLoading(false);
     }
   };
-  
+
   const fetchCategories = async () => {
     try {
       const response = await fetch('/api/admin/categories');
@@ -75,32 +76,32 @@ export default function PostsPage() {
       // You might want to show an error message to the user here
     }
   };
-  
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Update URL query params
     const params = new URLSearchParams();
     if (searchQuery) params.append('q', searchQuery);
     if (category) params.append('category', category);
-    
+
     router.push(`/admin/dashboard/posts?${params}`);
     fetchPosts(1, searchQuery, category);
     setCurrentPage(1);
   };
-  
+
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return;
-    
+
     // Update URL with the new page
     const params = new URLSearchParams(searchParams);
     params.set('page', page.toString());
-    
+
     router.push(`/admin/dashboard/posts?${params}`);
     setCurrentPage(page);
     fetchPosts(page);
   };
-  
+
   const clearFilters = () => {
     setSearchQuery('');
     setCategory('');
@@ -113,14 +114,14 @@ export default function PostsPage() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Yazılar</h1>
-        <Link 
-          href="/admin/dashboard/posts/create" 
+        <Link
+          href="/admin/dashboard/posts/create"
           className="bg-[#8B7D6B] text-white px-4 py-2 rounded-md hover:bg-[#7C6F60] transition-colors"
         >
           Yeni Yazı Ekle
         </Link>
       </div>
-      
+
       {/* Search and filters */}
       <div className="bg-white p-6 rounded-lg shadow mb-6">
         <form onSubmit={handleSearch} className="space-y-4">
@@ -138,7 +139,7 @@ export default function PostsPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            
+
             <div>
               <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
                 Kategori
@@ -157,7 +158,7 @@ export default function PostsPage() {
                 ))}
               </select>
             </div>
-            
+
             <div className="flex items-end space-x-2">
               <button
                 type="submit"
@@ -165,7 +166,7 @@ export default function PostsPage() {
               >
                 Filtrele
               </button>
-              
+
               <button
                 type="button"
                 onClick={clearFilters}
@@ -177,7 +178,7 @@ export default function PostsPage() {
           </div>
         </form>
       </div>
-      
+
       {/* Posts table */}
       <div className="bg-white p-6 rounded-lg shadow">
         {loading ? (
@@ -218,9 +219,8 @@ export default function PostsPage() {
                           {post.category?.name || 'Kategori yok'}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                            post.published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                          }`}>
+                          <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${post.published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                            }`}>
                             {post.published ? 'Yayında' : 'Taslak'}
                           </span>
                         </td>
@@ -247,7 +247,7 @@ export default function PostsPage() {
                 </tbody>
               </table>
             </div>
-            
+
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex justify-center mt-6">
@@ -255,31 +255,28 @@ export default function PostsPage() {
                   <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium ${
-                      currentPage === 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-50'
-                    }`}
+                    className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium ${currentPage === 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-50'
+                      }`}
                   >
                     Önceki
                   </button>
-                  
+
                   {Array.from({ length: totalPages }, (_, i) => (
                     <button
                       key={i + 1}
                       onClick={() => handlePageChange(i + 1)}
-                      className={`relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium ${
-                        currentPage === i + 1 ? 'text-[#8B7D6B] border-[#8B7D6B] z-10' : 'text-gray-500 hover:bg-gray-50'
-                      }`}
+                      className={`relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium ${currentPage === i + 1 ? 'text-[#8B7D6B] border-[#8B7D6B] z-10' : 'text-gray-500 hover:bg-gray-50'
+                        }`}
                     >
                       {i + 1}
                     </button>
                   ))}
-                  
+
                   <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className={`relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium ${
-                      currentPage === totalPages ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-50'
-                    }`}
+                    className={`relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium ${currentPage === totalPages ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-50'
+                      }`}
                   >
                     Sonraki
                   </button>

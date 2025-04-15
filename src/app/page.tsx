@@ -3,12 +3,11 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FaBalanceScale, FaGavel, FaHandshake, FaRegFileAlt, FaBriefcase, FaBuilding, FaMap, FaUserFriends } from 'react-icons/fa';
+import { FaBalanceScale, FaHandshake, FaRegFileAlt, FaBriefcase } from 'react-icons/fa';
 import { getRecentBlogPosts } from '@/data/blogPosts';
 import { format } from 'date-fns';
 import { tr } from 'date-fns/locale';
 import { BlogPost } from '@/types/blog';
-import { blogCategories } from '@/data/blogCategories';
 
 export default function Home() {
   const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
@@ -34,9 +33,9 @@ export default function Home() {
       {/* Hero section */}
       <section className="relative h-[600px] bg-[#8B7D6B] text-white flex items-center">
         <div className="absolute inset-0 z-0">
-          <Image 
+          <Image
             src="/images/home1.jpg"
-            alt="Avukat Mehmet Can Çelimli" 
+            alt="Avukat Mehmet Can Çelimli"
             fill
             style={{ objectFit: 'cover', objectPosition: 'center' }}
             priority
@@ -155,9 +154,9 @@ export default function Home() {
               <div className="flex flex-col md:flex-row">
                 {/* Image container - full width on mobile, half width on desktop */}
                 <div className="relative w-full md:w-1/2 h-[400px]">
-                  <Image 
+                  <Image
                     src="/images/person.jpg"
-                    alt="Avukat Mehmet Can Çelimli" 
+                    alt="Avukat Mehmet Can Çelimli"
                     fill
                     style={{ objectFit: 'cover' }}
                     className="rounded-t-lg md:rounded-l-lg md:rounded-t-none"
@@ -169,7 +168,7 @@ export default function Home() {
                   <h2 className="text-3xl font-bold mb-2 text-[#8B7D6B]">Av. Mehmet Can Çelimli</h2>
                   <div className="text-[#8B7D6B] mb-3">Kurucu</div>
                   <p className="text-[#4A4A4A] mb-4">
-                    Selçuk Üniversitesi Hukuk Fakültesi'nden mezun olduktan sonra, prestijli bir hukuk bürosunda 5 yıl deneyim kazandım. 2003 yılında kendi hukuk büromu kurdum ve o zamandan beri başarılı bir şekilde müvekkillerime hizmet vermekteyim.
+                    Selçuk Üniversitesi Hukuk Fakültesi&apos;nden mezun olduktan sonra, prestijli bir hukuk bürosunda 5 yıl deneyim kazandım. 2003 yılında kendi hukuk büromu kurdum ve o zamandan beri başarılı bir şekilde müvekkillerime hizmet vermekteyim.
                   </p>
                   <p className="text-[#4A4A4A] mb-6">
                     Ceza Hukuku, Aile Hukuku, İş Hukuku ve Ticaret Hukuku alanlarında uzmanlaşmış ekibimle beraber, müvekkillerimizin haklarını korumak için titizlikle çalışıyoruz. Her davaya özel yaklaşımımız ve detaycı çalışma prensibimiz ile fark yaratıyoruz.
@@ -240,7 +239,7 @@ export default function Home() {
               recentPosts.map((post) => (
                 <div key={post.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
                   <div className="relative h-48 w-full">
-                    <Image 
+                    <Image
                       src={post.coverImage}
                       alt={post.title}
                       fill

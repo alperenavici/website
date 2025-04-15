@@ -2,7 +2,7 @@
 
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Category, Post } from '@/types/supabase';
+import { Category } from '@/types/supabase';
 import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 
@@ -14,7 +14,7 @@ export default function EditPostPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [imageUploading, setImageUploading] = useState(false);
-  
+
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [categoryId, setCategoryId] = useState('');
@@ -23,11 +23,11 @@ export default function EditPostPage() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [published, setPublished] = useState(false);
   const [featured, setFeatured] = useState(false);
-  
+
   const params = useParams();
   const router = useRouter();
   const postId = params.id as string;
-  
+
   // Yazı verilerini ve kategorileri getir
   useEffect(() => {
     const fetchData = async () => {
@@ -38,14 +38,14 @@ export default function EditPostPage() {
           fetch(`/api/admin/posts/${postId}`),
           fetch('/api/admin/categories')
         ]);
-        
+
         if (!postResponse.ok) {
           throw new Error('Yazı bulunamadı');
         }
-        
+
         const post = await postResponse.json();
         const categoriesData = await categoriesResponse.json();
-        
+
         // Form alanlarını doldur
         setTitle(post.title);
         setContent(post.content);
@@ -61,14 +61,14 @@ export default function EditPostPage() {
         setLoading(false);
       }
     };
-    
+
     fetchData();
   }, [postId]);
-  
+
   // Görsel seçme ve önizleme
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-    
+
     if (file) {
       setCoverImageFile(file);
       // Görsel önizlemesini oluştur
@@ -83,36 +83,36 @@ export default function EditPostPage() {
   // Görseli yükle
   const uploadImage = async () => {
     if (!coverImageFile) return null;
-    
+
     setImageUploading(true);
     setUploadProgress(0);
-    
+
     try {
       // Dosya adını benzersiz kılmak için zaman damgası ekleyin
       const fileExt = coverImageFile.name.split('.').pop();
       const fileName = `${Math.random().toString(36).substring(2, 15)}_${Date.now()}.${fileExt}`;
       const filePath = `blog/${fileName}`;
-      
+
       // Supabase'e yükle
-      const { data, error } = await supabase.storage
+      const { error } = await supabase.storage
         .from('images')
         .upload(filePath, coverImageFile, {
           cacheControl: '3600',
           upsert: false
         });
-      
+
       if (error) {
         throw error;
       }
-      
+
       // İlerleme durumunu manuel olarak güncelle
       setUploadProgress(100);
-      
+
       // Dosya URL'sini al
       const { data: { publicUrl } } = supabase.storage
         .from('images')
         .getPublicUrl(filePath);
-      
+
       return publicUrl;
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -122,32 +122,32 @@ export default function EditPostPage() {
       setImageUploading(false);
     }
   };
-  
+
   // Yazıyı güncelle
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    
+
     // Validasyon
     if (!title.trim() || !content.trim() || !categoryId) {
       setError('Lütfen tüm zorunlu alanları doldurun');
       return;
     }
-    
+
     setSaving(true);
     setError('');
     setSuccess('');
-    
+
     try {
       // Eğer bir görsel seçildiyse yükle
       let imageUrl = coverImage;
       if (coverImageFile) {
         imageUrl = await uploadImage() || '';
-        
+
         if (!imageUrl) {
           throw new Error('Görsel yüklenemedi');
         }
       }
-      
+
       const response = await fetch(`/api/admin/posts/${postId}`, {
         method: 'PATCH',
         headers: {
@@ -162,55 +162,55 @@ export default function EditPostPage() {
           featured
         })
       });
-      
+
       if (!response.ok) {
         const data = await response.json();
         throw new Error(data.message || 'Yazı güncellenirken bir hata oluştu');
       }
-      
+
       setSuccess('Yazı başarıyla güncellendi');
-      
+
       // 2 saniye sonra yazılar sayfasına yönlendir
       setTimeout(() => {
         router.push('/admin/dashboard/posts');
       }, 2000);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating post:', error);
-      setError(error.message || 'Yazı güncellenirken bir hata oluştu');
+      setError(error instanceof Error ? error.message : 'Yazı güncellenirken bir hata oluştu');
     } finally {
       setSaving(false);
     }
   };
-  
+
   // Yazıyı sil
   const handleDelete = async () => {
     // Kullanıcıdan onay al
     if (!confirm('Bu yazıyı silmek istediğinize emin misiniz?')) {
       return;
     }
-    
+
     setLoading(true);
     setError('');
-    
+
     try {
       const response = await fetch(`/api/admin/posts/${postId}`, {
         method: 'DELETE'
       });
-      
+
       if (!response.ok) {
         const data = await response.json();
         throw new Error(data.message || 'Yazı silinirken bir hata oluştu');
       }
-      
+
       // Yazılar sayfasına yönlendir
       router.push('/admin/dashboard/posts');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error deleting post:', error);
-      setError(error.message || 'Yazı silinirken bir hata oluştu');
+      setError(error instanceof Error ? error.message : 'Yazı silinirken bir hata oluştu');
       setLoading(false);
     }
   };
-  
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -218,7 +218,7 @@ export default function EditPostPage() {
       </div>
     );
   }
-  
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
@@ -231,19 +231,19 @@ export default function EditPostPage() {
           Geri Dön
         </button>
       </div>
-      
+
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           {error}
         </div>
       )}
-      
+
       {success && (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
           {success}
         </div>
       )}
-      
+
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow mb-6">
         <div className="grid grid-cols-1 gap-6">
           <div>
@@ -259,7 +259,7 @@ export default function EditPostPage() {
               required
             />
           </div>
-          
+
           <div>
             <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
               Kategori <span className="text-red-500">*</span>
@@ -279,12 +279,12 @@ export default function EditPostPage() {
               ))}
             </select>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Kapak Görseli
             </label>
-            
+
             <div className="mt-1 flex flex-col space-y-4">
               {/* Mevcut URL ile yükleme */}
               <div className="w-full">
@@ -301,7 +301,7 @@ export default function EditPostPage() {
                   disabled={!!imagePreview}
                 />
               </div>
-              
+
               {/* Bilgisayardan dosya yükleme */}
               <div className="w-full">
                 <label htmlFor="coverImageFile" className="block text-sm text-gray-500 mb-1">
@@ -321,29 +321,29 @@ export default function EditPostPage() {
                   disabled={imageUploading}
                 />
               </div>
-              
+
               {/* Yükleme ilerleme çubuğu */}
               {imageUploading && (
                 <div className="w-full bg-gray-200 rounded-full h-2.5">
-                  <div 
-                    className="bg-[#8B7D6B] h-2.5 rounded-full" 
+                  <div
+                    className="bg-[#8B7D6B] h-2.5 rounded-full"
                     style={{ width: `${uploadProgress}%` }}
                   ></div>
                   <p className="text-sm text-gray-500 mt-1">Yükleniyor: %{uploadProgress}</p>
                 </div>
               )}
-              
+
               {/* Görsel önizleme */}
               {imagePreview && (
                 <div className="relative w-full h-48 mt-2 border rounded-md overflow-hidden">
-                  <Image 
-                    src={imagePreview} 
-                    alt="Kapak görseli önizleme" 
+                  <Image
+                    src={imagePreview}
+                    alt="Kapak görseli önizleme"
                     fill
                     style={{ objectFit: 'cover' }}
                     className="max-w-full"
                   />
-                  <button 
+                  <button
                     type="button"
                     onClick={() => {
                       setImagePreview(null);
@@ -357,18 +357,18 @@ export default function EditPostPage() {
                   </button>
                 </div>
               )}
-              
+
               {/* Mevcut görsel önizleme */}
               {coverImage && !imagePreview && (
                 <div className="relative w-full h-48 mt-2 border rounded-md overflow-hidden">
-                  <Image 
-                    src={coverImage} 
-                    alt="Kapak görseli önizleme" 
+                  <Image
+                    src={coverImage}
+                    alt="Kapak görseli önizleme"
                     fill
                     style={{ objectFit: 'cover' }}
                     className="max-w-full"
                   />
-                  <button 
+                  <button
                     type="button"
                     onClick={() => setCoverImage('')}
                     className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600"
@@ -381,7 +381,7 @@ export default function EditPostPage() {
               )}
             </div>
           </div>
-          
+
           <div>
             <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
               İçerik <span className="text-red-500">*</span>
@@ -394,7 +394,7 @@ export default function EditPostPage() {
               required
             />
           </div>
-          
+
           <div className="flex space-x-6">
             <div className="flex items-center">
               <input
@@ -408,7 +408,7 @@ export default function EditPostPage() {
                 Yayınla
               </label>
             </div>
-            
+
             <div className="flex items-center">
               <input
                 type="checkbox"
@@ -423,7 +423,7 @@ export default function EditPostPage() {
             </div>
           </div>
         </div>
-        
+
         <div className="mt-6 flex justify-between">
           <button
             type="button"
@@ -432,7 +432,7 @@ export default function EditPostPage() {
           >
             Yazıyı Sil
           </button>
-          
+
           <div className="flex space-x-2">
             <button
               type="button"
@@ -441,7 +441,7 @@ export default function EditPostPage() {
             >
               İptal
             </button>
-            
+
             <button
               type="submit"
               disabled={saving || imageUploading}
