@@ -15,6 +15,7 @@ export default function BlogPageClient({
   selectedCategory: string;
 }) {
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
   const [categories, setCategories] = useState<BlogCategory[]>(blogCategories);
   const [loading, setLoading] = useState(true);
 
@@ -23,21 +24,22 @@ export default function BlogPageClient({
     const fetchData = async () => {
       try {
         // Kategorileri ve blog yazılarını paralel olarak çek
-        const [categoriesData, allPosts] = await Promise.all([
+        const [categoriesData, fetchedPosts] = await Promise.all([
           getBlogCategories(),
           getBlogPosts()
         ]);
 
         setCategories(categoriesData);
+        setAllPosts(fetchedPosts);
 
         // Filter posts by category if a category is selected
         if (selectedCategory) {
-          const filteredPosts = allPosts.filter(post =>
+          const filteredPosts = fetchedPosts.filter(post =>
             post.categories.includes(selectedCategory)
           );
           setPosts(filteredPosts);
         } else {
-          setPosts(allPosts);
+          setPosts(fetchedPosts);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -164,7 +166,7 @@ export default function BlogPageClient({
                     >
                       <span>Tümü</span>
                       <span className="bg-[#E8E2D9] text-[#8B7D6B] text-xs rounded-full px-2 py-1">
-                        {posts.length}
+                        {allPosts.length}
                       </span>
                     </Link>
                   </li>
@@ -177,7 +179,7 @@ export default function BlogPageClient({
                       >
                         <span>{category.name}</span>
                         <span className="bg-[#E8E2D9] text-[#8B7D6B] text-xs rounded-full px-2 py-1">
-                          {posts?.filter(post => post.categories?.includes(category.slug)).length || 0}
+                          {allPosts?.filter(post => post.categories?.includes(category.slug)).length || 0}
                         </span>
                       </Link>
                     </li>
@@ -189,7 +191,7 @@ export default function BlogPageClient({
               <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
                 <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 border-b pb-2 text-gray-700">Son Yazılar</h3>
                 <ul className="space-y-3 sm:space-y-4">
-                  {posts.slice(0, 5).map((post) => (
+                  {allPosts.slice(0, 5).map((post) => (
                     <li key={post.id} className="flex items-start space-x-2 sm:space-x-3">
                       <div className="relative w-12 h-12 sm:w-16 sm:h-16 shrink-0 mt-1">
                         <Image
