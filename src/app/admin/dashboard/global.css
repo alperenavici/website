@@ -1,0 +1,26 @@
+/* Admin panel global styles */
+.text-gray-400,
+.text-gray-500,
+.text-gray-600,
+.text-gray-700,
+.text-gray-800,
+.text-gray-900 {
+    color: black !important;
+}
+
+/* Ensure table headers are readable */
+thead th {
+    color: black !important;
+}
+
+/* Ensure form labels are readable */
+label {
+    color: black !important;
+}
+
+/* Ensure text in inputs is black */
+input,
+select,
+textarea {
+    color: black !important;
+}

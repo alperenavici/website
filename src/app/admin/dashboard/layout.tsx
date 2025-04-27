@@ -64,31 +64,25 @@ export default function AdminLayout({
           <div className="mb-8">
             <h2 className="text-xl font-bold">Admin Panel</h2>
           </div>
-          
+
           <nav className="space-y-2 flex-grow">
-            <Link 
-              href="/admin/dashboard" 
+            <Link
+              href="/admin/dashboard"
               className="block px-4 py-2 rounded hover:bg-[#7C6F60] transition-colors"
             >
               Dashboard
             </Link>
-            <Link 
-              href="/admin/dashboard/posts" 
+            <Link
+              href="/admin/dashboard/posts"
               className="block px-4 py-2 rounded hover:bg-[#7C6F60] transition-colors"
             >
               Yazılar
             </Link>
-            <Link 
-              href="/admin/dashboard/categories" 
+            <Link
+              href="/admin/dashboard/categories"
               className="block px-4 py-2 rounded hover:bg-[#7C6F60] transition-colors"
             >
               Kategoriler
-            </Link>
-            <Link 
-              href="/admin/dashboard/comments" 
-              className="block px-4 py-2 rounded hover:bg-[#7C6F60] transition-colors"
-            >
-              Yorumlar
             </Link>
           </nav>
 
@@ -98,7 +92,7 @@ export default function AdminLayout({
                 <div className="font-medium">{user.username}</div>
                 <div className="text-sm opacity-70">{user.email}</div>
               </div>
-              <button 
+              <button
                 onClick={handleLogout}
                 className="text-sm py-1 px-2 bg-[#6B5D4B] rounded hover:bg-[#5A4C3A] transition-colors"
               >
@@ -109,7 +103,7 @@ export default function AdminLayout({
         </div>
 
         {/* Main content */}
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-8 text-black">
           {children}
         </div>
       </div>

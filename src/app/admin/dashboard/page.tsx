@@ -7,9 +7,7 @@ import { Post } from '@/types/supabase';
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
     postsCount: 0,
-    commentsCount: 0,
     categoriesCount: 0,
-    pendingCommentsCount: 0,
   });
   const [recentPosts, setRecentPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);

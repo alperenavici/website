@@ -30,11 +30,11 @@ const Header = () => {
           <div className="flex items-center space-x-4">
             <div className="flex items-center">
               <FaPhone className="mr-2 text-white-400" />
-              <span>+90 212 555 44 33</span>
+              <span>+90 553 491 99 03</span>
             </div>
             <div className="flex items-center">
               <FaEnvelope className="mr-2 text-white-400" />
-              <span>info@avukatlik.com</span>
+              <span>av.cancelimli@gmail.com</span>
             </div>
           </div>
           <div className="flex items-center space-x-4">
@@ -122,7 +122,7 @@ const Header = () => {
               </div>
               <div className="flex items-center">
                 <FaEnvelope className="mr-2" />
-                <span>info@avukatlik.com</span>
+                <span>av.cancelimli@gmail.com</span>
               </div>
             </div>
           </div>

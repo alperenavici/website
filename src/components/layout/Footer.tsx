@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -85,19 +85,16 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <FaPhone className="mr-2 text-white-400 flex-shrink-0" />
-                <span className="text-white-400">+90 212 555 44 33</span>
+                <span className="text-white-400">+90 553 491 99 03</span>
               </li>
               <li className="flex items-center">
                 <FaEnvelope className="mr-2 text-white-400 flex-shrink-0" />
-                <span className="text-white-400">info@avukatlik.com</span>
+                <span className="text-white-400">av.cancelimli@gmail.com</span>
               </li>
             </ul>
             <div className="flex space-x-4 mt-4">
               <a href="#" className="bg-white-800 hover:bg-white-700 p-2 rounded-full transition-colors">
                 <FaFacebook />
-              </a>
-              <a href="#" className="bg-white-800 hover:bg-white-700 p-2 rounded-full transition-colors">
-                <FaTwitter />
               </a>
               <a href="#" className="bg-white-800 hover:bg-white-700 p-2 rounded-full transition-colors">
                 <FaLinkedin />

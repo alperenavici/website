@@ -48,7 +48,8 @@ export default function Home() {
               Hukuki Sorunlarınıza <span className="text-[#ffffff]">Profesyonel</span> Çözümler
             </h1>
             <p className="text-xl mb-8 text-[#ffffff]">
-              20 yılı aşkın deneyimimiz ile hukukun farklı alanlarında uzman ekibimizle yanınızdayız.
+             Hukuki İhtiyaçlarınıza Güvenilir Çözümler
+             Tecrübemiz, bilgimiz ve çözüm odaklı yaklaşımımızla her adımda yanınızdayız.
             </p>
             <div className="flex space-x-4">
               <Link href="/contact" className="bg-gray-800 hover:bg-[#6B5F4F] text-white px-6 py-3 rounded-md font-medium transition-colors">
@@ -168,10 +169,7 @@ export default function Home() {
                   <h2 className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2 text-[#8B7D6B]">Av. Mehmet Can Çelimli</h2>
                   <div className="text-[#8B7D6B] mb-2 sm:mb-3">Kurucu</div>
                   <p className="text-sm sm:text-base text-[#4A4A4A] mb-3 sm:mb-4">
-                    Selçuk Üniversitesi Hukuk Fakültesi&apos;nden mezun olduktan sonra, prestijli bir hukuk bürosunda 5 yıl deneyim kazandım. 2003 yılında kendi hukuk büromu kurdum ve o zamandan beri başarılı bir şekilde müvekkillerime hizmet vermekteyim.
-                  </p>
-                  <p className="text-sm sm:text-base text-[#4A4A4A] mb-4 sm:mb-6">
-                    Ceza Hukuku, Aile Hukuku, İş Hukuku ve Ticaret Hukuku alanlarında uzmanlaşmış ekibimle beraber, müvekkillerimizin haklarını korumak için titizlikle çalışıyoruz. Her davaya özel yaklaşımımız ve detaycı çalışma prensibimiz ile fark yaratıyoruz.
+                    1994 yılında Aydın&apos;da doğdum. Selçuk Üniversitesi Hukuk Fakültesi&apos;nden 2017 yılında mezun oldum. 2019 yılında Dokuz Eylül Üniversitesi bünyesinde başladığım Ekonomi Hukuku yüksek lisans eğitimimi 2021 yılında başarıyla tamamladım. 2019&apos;dan bu yana, serbest avukatlık faaliyetlerimiz kapsamında müvekkillerimizin hukuki ihtiyaçlarına çözüm üretiyoruz.
                   </p>
                   {/* Social media icons with better spacing */}
                   <div className="flex justify-start space-x-3 sm:space-x-4 mb-4">
@@ -207,7 +205,7 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Hukuki Danışmanlık İçin Hemen İletişime Geçin</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Profesyonel ekibimiz, hukuki sorunlarınıza çözüm bulmak için hazır. İlk görüşme ücretsizdir.
+            Hukuki sorunlarınıza çözüm bulmak için hazırım.
           </p>
           <Link href="/contact" className="bg-white text-[#8B7D6B] hover:bg-[#E8E2D9] px-8 py-4 rounded-md font-medium text-lg transition-colors inline-block">
             Randevu Alın

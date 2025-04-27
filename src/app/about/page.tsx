@@ -32,13 +32,13 @@ export default function AboutPage() {
             <div className="md:w-1/2">
               <h2 className="text-3xl font-bold mb-6 text-[#8B7D6B]">Hukuk Büromuz</h2>
               <p className="text-lg text-[#4A4A4A] mb-6">
-                2003 yılında Av. Mehmet Can Çelimli tarafından kurulan hukuk büromuz, hukuki sorunlara profesyonel ve etkili çözümler sunmak amacıyla faaliyetlerine başlamıştır. Müvekkillerimizin haklarını korumak ve hukuki süreçleri en etkili şekilde yönetmek temel prensiplerimizdendir.
+                2019 yılından bu yana, serbest avukatlık faaliyetlerimiz kapsamında müvekkillerimizin hukuki ihtiyaçlarına etkili ve kalıcı çözümler sunuyoruz. Çalışmalarımızın merkezine, her müvekkilimizin yaşadığı hukuki süreci en doğru şekilde anlamayı ve ona özel stratejiler geliştirmeyi koyuyoruz.
               </p>
               <p className="text-lg text-[#4A4A4A] mb-6">
-                Deneyimli avukat kadromuz ile ceza hukuku, aile hukuku, iş hukuku, ticaret hukuku ve miras hukuku gibi birçok alanda hizmet vermekteyiz. Her davayı titizlikle ele alıyor, müvekkillerimize özel çözümler sunuyoruz.
+                Hukuki destek sürecini yalnızca dava ve danışmanlık hizmeti sunmakla sınırlı görmüyor; her aşamada şeffaf iletişim kurarak müvekkillerimizle güçlü, güvene dayalı ilişkiler kurmayı temel ilkemiz olarak benimsiyoruz. İnanıyoruz ki, sağlıklı bir iletişim ve karşılıklı güven ortamı, hukuki süreçlerin başarısında en az bilgi ve deneyim kadar önemli bir rol oynamaktadır.
               </p>
               <p className="text-lg text-[#4A4A4A]">
-                Uzun yıllara dayanan deneyimimiz ve alanında uzman avukatlarımızla, müvekkillerimize hukuki süreçlerde rehberlik etmekten ve haklarını korumaktan gurur duyuyoruz.
+                Hukuku yalnızca bir kural ve normlar bütünü olarak değerlendirmiyor; onu bireylerin, ailelerin ve kurumların yaşamlarına yön veren, onların geleceğini şekillendiren dinamik bir destek unsuru olarak görüyoruz. Her davada ve her danışmanlık sürecinde, mesleki bilgi birikimimizi, etik değerlerimizi ve insan odaklı yaklaşımımızı bir araya getirerek hizmet veriyoruz.
               </p>
             </div>
             <div className="md:w-1/2">
@@ -118,7 +118,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Hukuki Danışmanlık İçin Hemen İletişime Geçin</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-[#E8E2D9]">
-            Profesyonel ekibimiz, hukuki sorunlarınıza çözüm bulmak için hazır. İlk görüşme ücretsizdir.
+            Profesyonel ekibimiz, hukuki sorunlarınıza çözüm bulmak için hazır.
           </p>
           <Link href="/contact" className="bg-white text-[#8B7D6B] hover:bg-[#E8E2D9] px-8 py-4 rounded-md font-medium text-lg transition-colors inline-block">
             Randevu Alın
