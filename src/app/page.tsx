@@ -53,7 +53,7 @@ export default function Home() {
             </p>
             <div className="flex space-x-4">
               <Link href="/contact" className="bg-gray-800 hover:bg-[#6B5F4F] text-white px-6 py-3 rounded-md font-medium transition-colors">
-                Hemen Randevu Alın
+                Hemen İletişime Geç
               </Link>
               <Link href="/services" className="bg-gray-800 hover:bg-[#E8E2D9] text-white px-6 py-3 rounded-md font-medium transition-colors">
                 Hizmetlerimiz
@@ -208,7 +208,7 @@ export default function Home() {
             Hukuki sorunlarınıza çözüm bulmak için hazırım.
           </p>
           <Link href="/contact" className="bg-white text-[#8B7D6B] hover:bg-[#E8E2D9] px-8 py-4 rounded-md font-medium text-lg transition-colors inline-block">
-            Randevu Alın
+            İletişime Geç
           </Link>
         </div>
       </section>

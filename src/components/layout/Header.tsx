@@ -86,7 +86,7 @@ const Header = () => {
 
           <div className="hidden lg:block">
             <Link href="/contact" className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md transition-colors">
-              Randevu Al
+              İletişime Geç
             </Link>
           </div>
         </nav>
@@ -111,7 +111,7 @@ const Header = () => {
                 İletişim
               </Link>
               <Link href="/contact" className="mt-4 bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-md transition-colors">
-                Randevu Al
+                İletişime Geç
               </Link>
             </div>
 

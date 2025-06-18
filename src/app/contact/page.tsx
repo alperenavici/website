@@ -1,30 +1,7 @@
-"use client";
-
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import Image from 'next/image';
-import { FormEvent, useState } from 'react';
 
 export default function ContactPage() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const phone = formData.get('phone') as string;
-    const message = formData.get('message') as string;
-
-    // Create mailto URL with form data
-    const subject = `İletişim Formu: ${name}`;
-    const body = `İsim: ${name}\nE-posta: ${email}\nTelefon: ${phone}\n\nMesaj:\n${message}`;
-    const mailtoUrl = `mailto:av.cancelimli@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    // Open the mailto link
-    window.open(mailtoUrl, '_blank');
-    setIsSubmitted(true);
-  };
 
   return (
     <>
@@ -52,139 +29,68 @@ export default function ContactPage() {
       {/* Contact content */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Contact form */}
-            <div className="bg-[#E8E2D9] rounded-lg shadow-md p-8">
-              <h2 className="text-2xl font-bold mb-6 text-[#8B7D6B]">Bize Ulaşın</h2>
-
-              {isSubmitted ? (
-                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
-                  <p className="font-medium">Mesajınız gönderildi!</p>
-                  <p>E-posta uygulamanız açılacak ve ileti taslağı hazırlanacaktır. Gönderimi tamamlamak için e-posta uygulamanızdan gönder düğmesine tıklayın.</p>
-                </div>
-              ) : null}
-
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-[#8B7D6B] mb-1">
-                    Adınız Soyadınız
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="w-full px-4 py-2 border border-[#8B7D6B] rounded-md focus:outline-none focus:ring-2 focus:ring-[#8B7D6B] bg-white text-black"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-[#8B7D6B] mb-1">
-                    E-posta Adresiniz
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="w-full px-4 py-2 border border-[#8B7D6B] rounded-md focus:outline-none focus:ring-2 focus:ring-[#8B7D6B] bg-white text-black"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-[#8B7D6B] mb-1">
-                    Telefon Numaranız
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    className="w-full px-4 py-2 border border-[#8B7D6B] rounded-md focus:outline-none focus:ring-2 focus:ring-[#8B7D6B] bg-white text-black"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-[#8B7D6B] mb-1">
-                    Mesajınız
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    className="w-full px-4 py-2 border border-[#8B7D6B] rounded-md focus:outline-none focus:ring-2 focus:ring-[#8B7D6B] bg-white text-black"
-                    required
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-[#8B7D6B] text-white py-3 px-6 rounded-md hover:bg-[#6B5F4F] transition-colors"
-                >
-                  Gönder
-                </button>
-              </form>
-            </div>
-
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Contact info */}
-            <div className="space-y-8">
-              <div className="bg-[#E8E2D9] rounded-lg shadow-md p-8">
-                <h2 className="text-2xl font-bold mb-6 text-[#8B7D6B]">İletişim Bilgileri</h2>
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <div className="bg-white p-3 rounded-full mr-4">
-                      <FaPhone className="text-[#8B7D6B]" />
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-[#8B7D6B]">Telefon</h3>
-                      <p className="text-[#4A4A4A]">+90 553 491 99 03</p>
-                    </div>
+            <div className="bg-[#E8E2D9] rounded-lg shadow-md p-8">
+              <h2 className="text-2xl font-bold mb-6 text-[#8B7D6B]">İletişim Bilgileri</h2>
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <div className="bg-white p-3 rounded-full mr-4">
+                    <FaPhone className="text-[#8B7D6B]" />
                   </div>
-                  <div className="flex items-start">
-                    <div className="bg-white p-3 rounded-full mr-4">
-                      <FaEnvelope className="text-[#8B7D6B]" />
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-[#8B7D6B]">E-posta</h3>
-                      <p className="text-[#4A4A4A]">av.cancelimli@gmail.com</p>
-                    </div>
+                  <div>
+                    <h3 className="font-medium text-[#8B7D6B]">Telefon</h3>
+                    <p className="text-[#4A4A4A]">+90 553 491 99 03</p>
                   </div>
-                  <div className="flex items-start">
-                    <div className="bg-white p-3 rounded-full mr-4">
-                      <FaMapMarkerAlt className="text-[#8B7D6B]" />
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-[#8B7D6B]">Adres</h3>
-                      <p className="text-[#4A4A4A]">
-                        Mimar Sinan Mahallesi, 2423 Sokak A1/17 Efeler / Aydın
-                      </p>
-                    </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-white p-3 rounded-full mr-4">
+                    <FaEnvelope className="text-[#8B7D6B]" />
                   </div>
-                  <div className="flex items-start">
-                    <div className="bg-white p-3 rounded-full mr-4">
-                      <FaClock className="text-[#8B7D6B]" />
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-[#8B7D6B]">Çalışma Saatleri</h3>
-                      <p className="text-[#4A4A4A]">
-                        Pazartesi - Cuma: 09:00 - 18:00<br />
-                        Cumartesi: 10:00 - 14:00
-                      </p>
-                    </div>
+                  <div>
+                    <h3 className="font-medium text-[#8B7D6B]">E-posta</h3>
+                    <p className="text-[#4A4A4A]">av.cancelimli@gmail.com</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-white p-3 rounded-full mr-4">
+                    <FaMapMarkerAlt className="text-[#8B7D6B]" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-[#8B7D6B]">Adres</h3>
+                    <p className="text-[#4A4A4A]">
+                      Mimar Sinan Mahallesi, 2423 Sokak A1/17 Efeler / Aydın
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="bg-white p-3 rounded-full mr-4">
+                    <FaClock className="text-[#8B7D6B]" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-[#8B7D6B]">Çalışma Saatleri</h3>
+                    <p className="text-[#4A4A4A]">
+                      Pazartesi - Cuma: 09:00 - 18:00<br />
+                      Cumartesi: 10:00 - 14:00
+                    </p>
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Map */}
-              <div className="bg-[#E8E2D9] rounded-lg shadow-md p-8">
-                <h2 className="text-2xl font-bold mb-6 text-[#8B7D6B]">Konum</h2>
-                <div className="aspect-w-16 aspect-h-9">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3157.642745409285!2d27.848429211886486!3d37.666978021342465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b92b75cbb255c9%3A0xf9e6c934dc527c85!2sMimar%20Sinan%2C%202423.%20Sk.%2C%2009100%20Efeler%2FAyd%C4%B1n!5e0!3m2!1str!2str!4v1652889012345!5m2!1str!2str"
-                    width="100%"
-                    height="300"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
-                </div>
+            {/* Map */}
+            <div className="bg-[#E8E2D9] rounded-lg shadow-md p-8">
+              <h2 className="text-2xl font-bold mb-6 text-[#8B7D6B]">Konum</h2>
+              <div className="aspect-w-16 aspect-h-9">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3157.642745409285!2d27.848429211886486!3d37.666978021342465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b92b75cbb255c9%3A0xf9e6c934dc527c85!2sMimar%20Sinan%2C%202423.%20Sk.%2C%2009100%20Efeler%2FAyd%C4%B1n!5e0!3m2!1str!2str!4v1652889012345!5m2!1str!2str"
+                  width="100%"
+                  height="300"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
             </div>
           </div>

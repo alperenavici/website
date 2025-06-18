@@ -142,7 +142,7 @@ export default function ServicesPage() {
             Profesyonel ekibimiz, hukuki sorunlarınıza çözüm bulmak için hazır. İlk görüşme ücretsizdir.
           </p>
           <Link href="/contact" className="bg-white text-[#8B7D6B] hover:bg-[#E8E2D9] px-8 py-4 rounded-md font-medium text-lg transition-colors inline-block">
-            Randevu Alın
+            İletişime Geç
           </Link>
         </div>
       </section>
