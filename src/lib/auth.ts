@@ -4,19 +4,32 @@ import { User } from '@/types/supabase';
 
 export const login = async (email: string, password: string) => {
   try {
-    // E-posta ve şifreyi kontrol et
-    if (email !== 'admin@example.com' || password !== 'admin123') {
-      return { status: false, code: 'invalid-credentials' };
-    }
-
     // Kullanıcıyı veritabanında kontrol et
     const { data: userData, error } = await supabase
       .from('users')
       .select('*')
       .eq('email', email)
+      .eq('role', 'ADMIN')  // Sadece admin rolündeki kullanıcılar giriş yapabilir
       .single();
 
     if (error || !userData) {
+      return { status: false, code: 'invalid-credentials' };
+    }
+
+    // Şifre kontrolü
+    // Eğer password field'ı varsa kontrol et, yoksa basit format kullan
+    let isPasswordValid = false;
+
+    if (userData.password) {
+      // Veritabanında şifre varsa direkt kontrol et
+      isPasswordValid = userData.password === password;
+    } else {
+      // Şifre yoksa basit format: emailusername + "123"
+      const expectedPassword = email.substring(0, email.indexOf('@')) + '123';
+      isPasswordValid = password === expectedPassword;
+    }
+
+    if (!isPasswordValid) {
       return { status: false, code: 'invalid-credentials' };
     }
 
