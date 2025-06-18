@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import ClientLayout from "@/components/ClientLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,7 +18,7 @@ export const metadata: Metadata = {
   title: "Av. Mehmet Can Çelimli | Hukuk Bürosu",
   description: "Profesyonel hukuki danışmanlık ve avukatlık hizmetleri",
   icons: {
-    icon: '/favicon.png',
+    icon: '/favicon.png', // veya istediğiniz icon dosyasının yolu
     shortcut: '/favicon.png',
     apple: '/favicon.png',
   },
@@ -34,8 +33,6 @@ export default function RootLayout({
     <html lang="tr">
       <head>
         {/* Kritik resimleri preload et */}
-        <link rel="preload" as="image" href="/images/musti.jpg" />
-        <link rel="preload" as="image" href="/favicon.png" />
         <link rel="preload" as="image" href="/images/home1.jpg" />
         <link rel="preload" as="image" href="/images/person.jpg" />
         <link rel="preload" as="image" href="/images/services.jpg" />
@@ -46,13 +43,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ClientLayout>
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex-grow">{children}</main>
-            <Footer />
-          </div>
-        </ClientLayout>
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
