@@ -14,6 +14,9 @@ export default function ContactPage() {
             fill
             className="object-cover opacity-60"
             priority
+            loading="eager"
+            quality={85}
+            sizes="100vw"
           />
         </div>
         <div className="container mx-auto px-2 z-10 pt-50">

@@ -31,6 +31,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr">
+      <head>
+        {/* Kritik resimleri preload et */}
+        <link rel="preload" as="image" href="/images/home1.jpg" />
+        <link rel="preload" as="image" href="/images/person.jpg" />
+        <link rel="preload" as="image" href="/images/services.jpg" />
+        <link rel="preload" as="image" href="/images/about2.jpg" />
+        <link rel="preload" as="image" href="/images/contact2.jpg" />
+        <link rel="preload" as="image" href="/images/ofis.jpg" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

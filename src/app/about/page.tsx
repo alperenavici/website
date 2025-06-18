@@ -16,6 +16,9 @@ export default function AboutPage() {
             fill
             className="object-cover opacity-110"
             priority
+            loading="eager"
+            quality={85}
+            sizes="100vw"
           />
         </div>
         <div className="container mx-auto px-2 z-10 pt-0 text-center">
@@ -49,6 +52,9 @@ export default function AboutPage() {
                   fill
                   className="object-cover"
                   priority
+                  loading="eager"
+                  quality={85}
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
             </div>

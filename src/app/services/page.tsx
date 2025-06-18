@@ -19,6 +19,9 @@ export default function ServicesPage() {
             fill
             className="object-cover opacity-80"
             priority
+            loading="eager"
+            quality={85}
+            sizes="100vw"
           />
         </div>
         <div className="container mx-auto px-2 z-10 pt-0 text-center">

@@ -70,10 +70,11 @@ export default function BlogPageClient({
             src="/images/blog2.jpg"
             alt="Blog Sayfası Arka Plan"
             fill
-            sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, 100vw"
-            quality={100}
+            sizes="100vw"
+            quality={85}
             className="object-cover opacity-100"
             priority
+            loading="eager"
           />
         </div>
         <div className="container mx-auto px-4 z-10 pt-0 text-center">
@@ -111,6 +112,7 @@ export default function BlogPageClient({
                           fill
                           sizes="(max-width: 768px) 100vw, 33vw"
                           style={{ objectFit: 'cover' }}
+                          quality={75}
                         />
                       </div>
                       <div className="w-full md:w-2/3 p-4 sm:p-6">

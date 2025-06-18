@@ -39,6 +39,9 @@ export default function Home() {
             fill
             style={{ objectFit: 'cover', objectPosition: 'center' }}
             priority
+            loading="eager"
+            quality={85}
+            sizes="100vw"
             className="opacity-60"
           />
         </div>
@@ -48,8 +51,8 @@ export default function Home() {
               Hukuki Sorunlarınıza <span className="text-[#ffffff]">Profesyonel</span> Çözümler
             </h1>
             <p className="text-xl mb-8 text-[#ffffff]">
-             Hukuki İhtiyaçlarınıza Güvenilir Çözümler
-             Tecrübemiz, bilgimiz ve çözüm odaklı yaklaşımımızla her adımda yanınızdayız.
+              Hukuki İhtiyaçlarınıza Güvenilir Çözümler
+              Tecrübemiz, bilgimiz ve çözüm odaklı yaklaşımımızla her adımda yanınızdayız.
             </p>
             <div className="flex space-x-4">
               <Link href="/contact" className="bg-gray-800 hover:bg-[#6B5F4F] text-white px-6 py-3 rounded-md font-medium transition-colors">
@@ -160,6 +163,10 @@ export default function Home() {
                     alt="Avukat Mehmet Can Çelimli"
                     fill
                     style={{ objectFit: 'cover' }}
+                    priority
+                    loading="eager"
+                    quality={85}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="w-full h-full"
                   />
                 </div>
