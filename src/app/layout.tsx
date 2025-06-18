@@ -17,6 +17,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Av. Mehmet Can Çelimli | Hukuk Bürosu",
   description: "Profesyonel hukuki danışmanlık ve avukatlık hizmetleri",
+  icons: {
+    icon: '/favicon.png', // veya istediğiniz icon dosyasının yolu
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
 };
 
 export default function RootLayout({
