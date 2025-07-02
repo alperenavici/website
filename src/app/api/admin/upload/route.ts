@@ -1,8 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { cookies } from 'next/headers';
 
 export async function POST(request: NextRequest) {
     try {
+        // Auth kontrolü
+        const cookieStore = await cookies();
+        const sessionCookie = cookieStore.get('session');
+
+        if (!sessionCookie) {
+            return NextResponse.json({ error: 'Yetkilendirme gerekli' }, { status: 401 });
+        }
+
         const formData = await request.formData();
         const file = formData.get('file') as File;
         const category = formData.get('category') as string;
@@ -40,7 +49,7 @@ export async function POST(request: NextRequest) {
         const bytes = await file.arrayBuffer();
 
         // Supabase Storage'a yükle
-        const { data: uploadData, error: uploadError } = await supabaseAdmin.storage
+        const { error: uploadError } = await supabaseAdmin.storage
             .from('images')
             .upload(fileName, bytes, {
                 contentType: file.type,
@@ -50,7 +59,7 @@ export async function POST(request: NextRequest) {
         if (uploadError) {
             console.error('Supabase upload hatası:', uploadError);
             return NextResponse.json({
-                error: 'Dosya Supabase\'e yüklenirken hata oluştu'
+                error: 'Dosya Supabase\'e yüklenirken hata oluştu: ' + uploadError.message
             }, { status: 500 });
         }
 
@@ -74,7 +83,7 @@ export async function POST(request: NextRequest) {
     } catch (error) {
         console.error('Dosya yükleme hatası:', error);
         return NextResponse.json({
-            error: 'Dosya yüklenirken bir hata oluştu'
+            error: 'Dosya yüklenirken bir hata oluştu: ' + (error instanceof Error ? error.message : 'Bilinmeyen hata')
         }, { status: 500 });
     }
 } 
