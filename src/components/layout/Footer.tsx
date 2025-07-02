@@ -2,8 +2,6 @@ import Link from 'next/link';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="bg-[#333333] text-white">
       <div className="container mx-auto px-4 py-8 sm:py-12">
@@ -104,10 +102,6 @@ const Footer = () => {
               </a>
             </div>
           </div>
-        </div>
-
-        <div className="border-t border-white-800 mt-8 sm:mt-12 pt-6 sm:pt-8 text-center text-white-400 text-sm">
-          <p>&copy; {currentYear} Av. Mehmet Can Çelimli. Tüm hakları saklıdır.</p>
         </div>
       </div>
     </footer>
