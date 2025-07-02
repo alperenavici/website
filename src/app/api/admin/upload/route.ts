@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
-import { existsSync } from 'fs';
+import { supabaseAdmin } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
     try {
@@ -35,28 +33,41 @@ export async function POST(request: NextRequest) {
 
         // Dosya adını oluştur (benzersiz)
         const timestamp = Date.now();
-        const extension = path.extname(file.name);
-        const fileName = `${category}_${timestamp}${extension}`;
+        const extension = file.name.split('.').pop();
+        const fileName = `${category}_${timestamp}.${extension}`;
 
-        // Upload klasörünü kontrol et ve oluştur
-        const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-        if (!existsSync(uploadDir)) {
-            await mkdir(uploadDir, { recursive: true });
+        // Dosyayı ArrayBuffer'a çevir
+        const bytes = await file.arrayBuffer();
+
+        // Supabase Storage'a yükle
+        const { data: uploadData, error: uploadError } = await supabaseAdmin.storage
+            .from('images')
+            .upload(fileName, bytes, {
+                contentType: file.type,
+                upsert: true // Aynı isimde dosya varsa üzerine yaz
+            });
+
+        if (uploadError) {
+            console.error('Supabase upload hatası:', uploadError);
+            return NextResponse.json({
+                error: 'Dosya Supabase\'e yüklenirken hata oluştu'
+            }, { status: 500 });
         }
 
-        // Dosyayı kaydet
-        const filePath = path.join(uploadDir, fileName);
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
+        // Public URL'i al
+        const { data: urlData } = supabaseAdmin.storage
+            .from('images')
+            .getPublicUrl(fileName);
 
-        await writeFile(filePath, buffer);
-
-        // URL'i döndür
-        const fileUrl = `/uploads/${fileName}`;
+        if (!urlData.publicUrl) {
+            return NextResponse.json({
+                error: 'Dosya URL\'i alınamadı'
+            }, { status: 500 });
+        }
 
         return NextResponse.json({
             success: true,
-            url: fileUrl,
+            url: urlData.publicUrl,
             fileName: fileName
         });
 
