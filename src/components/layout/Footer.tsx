@@ -51,22 +51,22 @@ const Footer = () => {
             <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Hizmetlerimiz</h3>
             <ul className="space-y-1 sm:space-y-2 text-sm sm:text-base">
               <li>
-                <Link href="/services/criminal" className="text-white-400 hover:text-white transition-colors">
+                <Link href="/services" className="text-white-400 hover:text-white transition-colors">
                   Ceza Hukuku
                 </Link>
               </li>
               <li>
-                <Link href="/services/family" className="text-white-400 hover:text-white transition-colors">
+                <Link href="/services" className="text-white-400 hover:text-white transition-colors">
                   Aile Hukuku
                 </Link>
               </li>
               <li>
-                <Link href="/services/labor" className="text-white-400 hover:text-white transition-colors">
+                <Link href="/services" className="text-white-400 hover:text-white transition-colors">
                   İş Hukuku
                 </Link>
               </li>
               <li>
-                <Link href="/services/commercial" className="text-white-400 hover:text-white transition-colors">
+                <Link href="/services" className="text-white-400 hover:text-white transition-colors">
                   Ticaret Hukuku
                 </Link>
               </li>
