@@ -126,12 +126,12 @@ export default function BlogPostPage() {
   return (
     <div className="bg-white">
       {/* Navigation Bar */}
-      <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+      <nav className="sticky top-0 z-50 bg-[#8B7D6B]/95 backdrop-blur-sm border-b border-[#6B5F4F]">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <button
               onClick={() => router.back()}
-              className="inline-flex items-center text-[#8B7D6B] hover:text-[#6B5F4F] transition-colors duration-200 group"
+              className="inline-flex items-center text-white hover:text-gray-400 transition-colors duration-200 group"
             >
               <svg className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -140,7 +140,7 @@ export default function BlogPostPage() {
             </button>
             <Link
               href="/blog"
-              className="text-sm font-medium text-gray-600 hover:text-[#8B7D6B] transition-colors duration-200"
+              className="text-sm font-medium text-white hover:text-gray-400 transition-colors duration-200"
             >
               Tüm Yazılar
             </Link>
