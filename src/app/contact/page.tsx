@@ -1,7 +1,11 @@
+'use client';
+
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import Image from 'next/image';
+import { useSiteImages } from '@/lib/siteSettings';
 
 export default function ContactPage() {
+  const siteImages = useSiteImages();
 
   return (
     <>
@@ -9,7 +13,7 @@ export default function ContactPage() {
       <section className="relative h-[400px] bg-[#8B7D6B] text-white flex items-center">
         <div className="absolute inset-0 z-5">
           <Image
-            src="/images/contact2.jpg"
+            src={siteImages.images.contact_hero}
             alt="İletişim Sayfası Arka Plan"
             fill
             className="object-cover opacity-60"

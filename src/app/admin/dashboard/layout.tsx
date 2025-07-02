@@ -84,6 +84,12 @@ export default function AdminLayout({
             >
               Kategoriler
             </Link>
+            <Link
+              href="/admin/dashboard/images"
+              className="block px-4 py-2 rounded hover:bg-[#7C6F60] transition-colors"
+            >
+              Site Resimleri
+            </Link>
           </nav>
 
           <div className="mt-8 pt-4 border-t border-[#7C6F60]">

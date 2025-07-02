@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import { tr } from 'date-fns/locale';
 import { BlogPost, BlogCategory } from '@/types/blog';
 import { blogCategories, getBlogCategories } from '@/data/blogCategories';
+import { useSiteImages } from '@/lib/siteSettings';
 
 export default function BlogPageClient({
   selectedCategory,
@@ -18,6 +19,7 @@ export default function BlogPageClient({
   const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
   const [categories, setCategories] = useState<BlogCategory[]>(blogCategories);
   const [loading, setLoading] = useState(true);
+  const siteImages = useSiteImages();
 
   // Blog yazılarını ve kategorileri yükle
   useEffect(() => {
@@ -68,7 +70,7 @@ export default function BlogPageClient({
       <section className="relative h-[250px] sm:h-[300px] md:h-[400px] bg-[#8B7D6B] text-white flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/blog2.jpg"
+            src={siteImages.images.blog_hero}
             alt="Blog Sayfası Arka Plan"
             fill
             sizes="100vw"

@@ -1,20 +1,19 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaBalanceScale, FaGavel, FaHandshake, FaHome, FaBriefcase, FaUserFriends } from 'react-icons/fa';
-
-export const metadata = {
-  title: 'Hizmetlerimiz | Av. Mehmet Can Çelimli Bürosu',
-  description: 'Hukuk büromuzun sunduğu hizmetler ve uzmanlık alanları hakkında bilgi edinin.',
-};
+import { useSiteImages } from '@/lib/siteSettings';
 
 export default function ServicesPage() {
+  const siteImages = useSiteImages();
   return (
     <>
       {/* Hero section */}
       <section className="relative h-[400px] bg-[#8B7D6B] text-white flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/services.jpg"
+            src={siteImages.images.services_hero}
             alt="Hizmetlerimiz Sayfası Arka Plan"
             fill
             className="object-cover opacity-80"

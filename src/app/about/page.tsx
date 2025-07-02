@@ -3,15 +3,17 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaBalanceScale, FaClock, FaHandshake, FaGraduationCap } from 'react-icons/fa';
+import { useSiteImages } from '@/lib/siteSettings';
 
 export default function AboutPage() {
+  const siteImages = useSiteImages();
   return (
     <>
       {/* Hero section */}
       <section className="relative h-[400px] bg-[#8B7D6B] text-white flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/about2.jpg"
+            src={siteImages.images.about_hero}
             alt="Hakkımızda Sayfası Arka Plan"
             fill
             className="object-cover opacity-110"
@@ -47,7 +49,7 @@ export default function AboutPage() {
             <div className="md:w-1/2">
               <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-xl">
                 <Image
-                  src="/images/ofis.jpg"
+                  src={siteImages.images.about_office}
                   alt="Hukuk Bürosu Ofis Görseli"
                   fill
                   className="object-cover"
